@@ -76,6 +76,13 @@
       font-size: 20px;
       cursor: pointer;
     }
+    .price-display {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #1a73e8;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -105,8 +112,13 @@
           <option value="9">9 sections</option>
         </select>
       </label>
-      <input type="hidden" name="_subject" value="Sam Sparx Homework Order" />
+
+      <!-- Price shown to user -->
+      <div class="price-display" id="displayPrice">QAR 25</div>
+
+      <!-- Hidden input for submitted price -->
       <input type="hidden" name="Price" id="priceInput" />
+      <input type="hidden" name="_subject" value="Sam Sparx Homework Order" />
       <button type="submit">Submit Order</button>
     </form>
   </div>
@@ -126,12 +138,20 @@
       };
       return prices[n] || 0;
     }
+
     const sections = document.getElementById("sections");
     const priceInput = document.getElementById("priceInput");
-    sections.addEventListener("change", () => {
-      priceInput.value = "QAR " + calcPrice(+sections.value);
-    });
-    sections.dispatchEvent(new Event("change"));
+    const displayPrice = document.getElementById("displayPrice");
+
+    function updatePrice() {
+      const value = +sections.value;
+      const price = calcPrice(value);
+      priceInput.value = "QAR " + price;
+      displayPrice.textContent = "QAR " + price;
+    }
+
+    sections.addEventListener("change", updatePrice);
+    updatePrice(); // set default
   </script>
 </body>
 </html>
