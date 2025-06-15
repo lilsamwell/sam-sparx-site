@@ -100,6 +100,9 @@
           <option value="4">4 sections</option>
           <option value="5">5 sections</option>
           <option value="6">6 sections</option>
+          <option value="7">7 sections</option>
+          <option value="8">8 sections</option>
+          <option value="9">9 sections</option>
         </select>
       </label>
       <input type="hidden" name="_subject" value="Sam Sparx Homework Order" />
@@ -110,11 +113,18 @@
 
   <script>
     function calcPrice(n) {
-      if (n == 1) return 20;
-      if (n == 2) return 25;
-      if (n == 3) return 30;
-      if (n == 4) return 45;
-      return 45 + (n - 4) * 15;
+      const prices = {
+        1: 25,
+        2: 30,
+        3: 35,
+        4: 40,
+        5: 45,
+        6: 50,
+        7: 55,
+        8: 60,
+        9: 70
+      };
+      return prices[n] || 0;
     }
     const sections = document.getElementById("sections");
     const priceInput = document.getElementById("priceInput");
